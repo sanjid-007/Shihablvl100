@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Shihablvl100.API/Shihablvl100.API.csproj" />
+  <Project Path="Shihablvl100.Application/Shihablvl100.Application.csproj" />
+  <Project Path="Shihablvl100.Domain/Shihablvl100.Domain.csproj" />
+  <Project Path="Shihablvl100.Infrastructure/Shihablvl100.Infrastructure.csproj" />
+</Solution>
