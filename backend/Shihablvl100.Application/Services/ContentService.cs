@@ -24,11 +24,14 @@ public class ContentService
 
     public async Task<Content> CreateAsync(Content content)
     {
+        content.CreatedAt = DateTime.UtcNow;
+        content.UpdatedAt = DateTime.UtcNow;
         return await _contentRepository.CreateAsync(content);
     }
 
     public async Task<Content> UpdateAsync(Content content)
     {
+        content.UpdatedAt = DateTime.UtcNow;
         return await _contentRepository.UpdateAsync(content);
     }
 

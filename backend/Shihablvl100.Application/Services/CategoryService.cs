@@ -24,6 +24,7 @@ public class CategoryService
 
     public async Task<Category> CreateAsync(Category category)
     {
+        category.CreatedAt = DateTime.UtcNow;
         return await _categoryRepository.CreateAsync(category);
     }
 
