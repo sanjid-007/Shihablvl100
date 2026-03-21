@@ -19,3 +19,8 @@ export async function getContentById(id: number) {
   const res = await fetch(`${API_URL}/contents/${id}`);
   return res.json();
 }
+
+export async function getContentsByCategoryId(categoryId: number) {
+  const res = await fetch(`${API_URL}/contents?categoryId=${categoryId}`);
+  return res.json();
+}
