@@ -36,3 +36,8 @@ bin/
 obj/
 dist/
 build/
+
+# Tool generated
+.qodo/
+AGENTS.md
+CLAUDE.md
