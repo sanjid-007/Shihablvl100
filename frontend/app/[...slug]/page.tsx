@@ -15,6 +15,7 @@ type Content = {
   slug: string;
   body: string;
   categoryId: number;
+  createdAt: string;
 };
 
 export default async function CategoryPage({
@@ -26,91 +27,86 @@ export default async function CategoryPage({
   const categories: Category[] = await getCategories();
   const contents: Content[] = await getContents();
 
-
   let currentCategory: Category | undefined;
 
   for (const s of slug) {
     if (!currentCategory) {
-   
       currentCategory = categories.find(
-        (c) => c.slug === s && c.parentId === null
+        c => c.slug === s && c.parentId === null
       );
     } else {
-     
       currentCategory = categories.find(
-        (c) => c.slug === s && c.parentId === currentCategory!.id
+        c => c.slug === s && c.parentId === currentCategory!.id
       );
     }
   }
 
   if (!currentCategory) {
-    return <div className="p-8 text-xl">Category not found</div>;
+    return (
+      <div className="px-6 py-16">
+        <h1 className="text-2xl font-bold">Category not found</h1>
+      </div>
+    );
   }
-
 
   const children = categories.filter(
-    (c) => c.parentId === currentCategory!.id
+    c => c.parentId === currentCategory!.id
   );
-
 
   const categoryContents = contents.filter(
-    (c) => c.categoryId === currentCategory!.id
+    c => c.categoryId === currentCategory!.id
   );
 
-  
-  const breadcrumb: string[] = [];
-  let temp: Category | undefined = currentCategory;
-  while (temp) {
-    breadcrumb.unshift(temp.name);
-    temp = categories.find((c) => c.id === temp!.parentId);
-  }
-
   return (
-    <div className="min-h-screen p-8">
-     
-      <div className="text-gray-500 mb-4">
-        <Link href="/" className="hover:underline">Home</Link>
-        {breadcrumb.map((name, i) => (
-          <span key={i}> → {name}</span>
-        ))}
+    <div className="px-6">
+      <div className="py-16">
+        <h1 className="text-5xl font-bold">{currentCategory.name}</h1>
       </div>
 
-      <h1 className="text-4xl font-bold mb-8">{currentCategory.name}</h1>
-
-      
       {children.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          {children.map((child) => (
-            <a
-              key={child.id}
-              href={`/${slug.join("/")}/${child.slug}`}
-              className="p-6 border rounded-lg hover:bg-gray-100"
-            >
-              <h2 className="text-2xl font-semibold">{child.name}</h2>
-            </a>
-          ))}
+        <div className="py-16 border-t border-gray-800">
+          <h2 className="text-sm uppercase tracking-widest text-gray-400">
+            Topics
+          </h2>
+          <div className="grid grid-cols-3 gap-6 mt-8">
+            {children.map(child => (
+              <Link
+                key={child.id}
+                href={`/${slug.join("/")}/${child.slug}`}
+                className="p-8 border border-gray-800 rounded-lg hover:border-gray-600"
+              >
+                <h3 className="text-2xl font-bold">{child.name}</h3>
+                <p className="text-gray-500 text-sm mt-2">Explore →</p>
+              </Link>
+            ))}
+          </div>
         </div>
       )}
 
-    
       {categoryContents.length > 0 && (
-        <div className="space-y-4">
-          <h2 className="text-2xl font-semibold mb-4">Articles</h2>
-          {categoryContents.map((content) => (
-            <a
-              key={content.id}
-              href={`/content/${content.slug}`}
-              className="block p-4 border rounded-lg hover:bg-gray-100"
-            >
-              <h3 className="text-xl">{content.title}</h3>
-            </a>
-          ))}
+        <div className="py-16 border-t border-gray-800">
+          <h2 className="text-sm uppercase tracking-widest text-gray-400">
+            Articles
+          </h2>
+          <div className="flex flex-col gap-4 mt-8">
+            {categoryContents.map(content => (
+              <Link
+                key={content.id}
+                href={`/content/${content.slug}`}
+                className="p-6 border border-gray-800 rounded-lg hover:border-gray-600 flex items-center justify-between"
+              >
+                <h3 className="text-lg font-bold">{content.title}</h3>
+                <span className="text-gray-500">→</span>
+              </Link>
+            ))}
+          </div>
         </div>
       )}
 
-     
       {children.length === 0 && categoryContents.length === 0 && (
-        <p className="text-gray-500">No content yet.</p>
+        <div className="py-16">
+          <p className="text-gray-500">No content yet.</p>
+        </div>
       )}
     </div>
   );
