@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /app
 
-COPY *.sln .
+COPY *.slnx .
 COPY Shihablvl100.Domain/*.csproj ./Shihablvl100.Domain/
 COPY Shihablvl100.Application/*.csproj ./Shihablvl100.Application/
 COPY Shihablvl100.Infrastructure/*.csproj ./Shihablvl100.Infrastructure/
