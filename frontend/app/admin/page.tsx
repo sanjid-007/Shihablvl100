@@ -43,7 +43,7 @@ export default function AdminPage() {
   const [contentMessage, setContentMessage] = useState("");
 
   async function fetchCategories(): Promise<Category[]> {
-    const res = await fetch("http://localhost:5000/api/categories");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`);
     return res.json();
   }
 
@@ -70,7 +70,7 @@ export default function AdminPage() {
     setCatMessage("");
 
     const authToken = localStorage.getItem("token");
-    const res = await fetch("http://localhost:5000/api/categories", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +104,7 @@ export default function AdminPage() {
     }
 
     const authToken = localStorage.getItem("token");
-    const res = await fetch("http://localhost:5000/api/contents", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contents`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

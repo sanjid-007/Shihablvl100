@@ -9,7 +9,11 @@ using Microsoft.OpenApi;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? Environment.GetEnvironmentVariable("DATABASE_URL");
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -23,7 +27,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        var supabaseUrl = builder.Configuration["Supabase:Url"]!;
+       var supabaseUrl = builder.Configuration["Supabase:Url"]
+    ?? Environment.GetEnvironmentVariable("SUPABASE_URL");
 
         options.Authority = supabaseUrl + "/auth/v1";
         options.TokenValidationParameters = new TokenValidationParameters

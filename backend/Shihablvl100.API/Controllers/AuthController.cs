@@ -20,8 +20,10 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
-        var supabaseUrl = _config["Supabase:Url"];
-        var supabaseKey = _config["Supabase:AnonKey"];
+        var supabaseUrl = _config["Supabase:Url"]
+        ?? Environment.GetEnvironmentVariable("SUPABASE_URL");
+    var supabaseKey = _config["Supabase:AnonKey"]
+        ?? Environment.GetEnvironmentVariable("SUPABASE_ANON_KEY");
 
         var url = $"{supabaseUrl}/auth/v1/token?grant_type=password";
 
