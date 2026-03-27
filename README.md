@@ -7,11 +7,6 @@ A full-stack educational content platform built with **.NET 10**, **Next.js**, a
 - **Frontend:** [https://shihablvl100.vercel.app](https://shihablvl100.vercel.app)
 - **Backend API:** [https://shihablvl100.onrender.com/api](https://shihablvl100.onrender.com/api)
 
-## 📸 Screenshots
-
-![Home Page](https://via.placeholder.com/800x400?text=Home+Page)
-![Category Page](https://via.placeholder.com/800x400?text=Category+Page)
-![Content Page](https://via.placeholder.com/800x400?text=Content+Page)
 
 ## 🏗️ Architecture
 
