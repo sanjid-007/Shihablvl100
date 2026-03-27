@@ -43,8 +43,13 @@ export default async function CategoryPage({
 
   if (!currentCategory) {
     return (
-      <div className="px-6 py-16">
-        <h1 className="text-2xl font-bold">Category not found</h1>
+      <div className="mx-auto w-full max-w-6xl px-6 py-16 md:px-8">
+        <div className="rounded-xl border border-brand-border bg-white/[0.02] p-8">
+          <h1 className="text-2xl font-bold">Category not found</h1>
+          <p className="mt-2 text-sm text-brand-muted">
+            The requested category does not exist or may have been moved.
+          </p>
+        </div>
       </div>
     );
   }
@@ -58,55 +63,80 @@ export default async function CategoryPage({
   );
 
   return (
-    <div className="px-6">
-      <div className="py-16">
-        <h1 className="text-5xl font-bold">{currentCategory.name}</h1>
-      </div>
+    <div className="mx-auto w-full max-w-6xl px-6 pb-20 pt-10 md:px-8">
+      <section className="rounded-2xl border border-brand-border bg-gradient-to-b from-white/5 to-transparent p-8 md:p-12">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
+          Category
+        </p>
+        <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+          {currentCategory.name}
+        </h1>
+      </section>
 
       {children.length > 0 && (
-        <div className="py-16 border-t border-gray-800">
-          <h2 className="text-sm uppercase tracking-widest text-gray-400">
-            Topics
-          </h2>
-          <div className="grid grid-cols-3 gap-6 mt-8">
-            {children.map(child => (
+        <section className="mt-12 border-t border-brand-border pt-10">
+          <h2 className="text-2xl font-semibold tracking-tight">Topics</h2>
+          <p className="mt-2 text-sm text-brand-muted">
+            Continue exploring sub-categories.
+          </p>
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {children.map((child) => (
               <Link
                 key={child.id}
                 href={`/${slug.join("/")}/${child.slug}`}
-                className="p-8 border border-gray-800 rounded-lg hover:border-gray-600"
+                className="group rounded-xl border border-brand-border bg-white/[0.02] p-6 transition hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.04]"
               >
-                <h3 className="text-2xl font-bold">{child.name}</h3>
-                <p className="text-gray-500 text-sm mt-2">Explore →</p>
+                <h3 className="text-xl font-semibold">{child.name}</h3>
+                <p className="mt-2 text-sm text-brand-muted">
+                  View related resources and guides.
+                </p>
+                <p className="mt-6 text-sm font-medium text-brand-accent">
+                  Explore topic
+                </p>
               </Link>
             ))}
           </div>
-        </div>
+        </section>
       )}
 
       {categoryContents.length > 0 && (
-        <div className="py-16 border-t border-gray-800">
-          <h2 className="text-sm uppercase tracking-widest text-gray-400">
-            Articles
-          </h2>
-          <div className="flex flex-col gap-4 mt-8">
-            {categoryContents.map(content => (
+        <section className="mt-12 border-t border-brand-border pt-10">
+          <h2 className="text-2xl font-semibold tracking-tight">Articles</h2>
+          <p className="mt-2 text-sm text-brand-muted">
+            Read the latest content in this category.
+          </p>
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+            {categoryContents.map((content) => (
               <Link
                 key={content.id}
                 href={`/content/${content.slug}`}
-                className="p-6 border border-gray-800 rounded-lg hover:border-gray-600 flex items-center justify-between"
+                className="group rounded-xl border border-brand-border bg-white/[0.02] p-6 transition hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.04]"
               >
-                <h3 className="text-lg font-bold">{content.title}</h3>
-                <span className="text-gray-500">→</span>
+                <h3 className="text-lg font-semibold md:text-xl">
+                  {content.title}
+                </h3>
+                <div className="mt-6 flex items-center justify-between text-sm text-brand-muted">
+                  <span>
+                    {new Date(content.createdAt).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </span>
+                  <span className="font-medium text-white">Read more</span>
+                </div>
               </Link>
             ))}
           </div>
-        </div>
+        </section>
       )}
 
       {children.length === 0 && categoryContents.length === 0 && (
-        <div className="py-16">
-          <p className="text-gray-500">No content yet.</p>
-        </div>
+        <section className="mt-12">
+          <div className="rounded-xl border border-brand-border bg-white/[0.02] p-8">
+            <p className="text-brand-muted">No content has been added yet.</p>
+          </div>
+        </section>
       )}
     </div>
   );

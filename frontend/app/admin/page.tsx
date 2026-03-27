@@ -130,35 +130,47 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="px-6 py-16 max-w-2xl">
-      <h1 className="text-3xl font-bold mb-12">Admin Dashboard</h1>
+    <div className="mx-auto w-full max-w-5xl px-6 pb-20 pt-10 md:px-8">
+      <section className="rounded-2xl border border-brand-border bg-gradient-to-b from-white/5 to-transparent p-8 md:p-12">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
+          Admin
+        </p>
+        <h1 className="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+          Dashboard
+        </h1>
+        <p className="mt-3 text-sm text-brand-muted md:text-base">
+          Create and organize categories and learning content.
+        </p>
+      </section>
 
-      <div className="mb-16">
-        <h2 className="text-xl font-bold mb-4">Create Category</h2>
+      <section className="mt-12 rounded-xl border border-brand-border bg-white/[0.02] p-6 md:p-8">
+        <h2 className="text-2xl font-semibold tracking-tight">Create Category</h2>
 
         {catMessage && (
-          <p className="text-green-400 text-sm mb-4">{catMessage}</p>
+          <p className="mb-4 mt-4 rounded-md border border-green-500/30 bg-green-500/10 px-3 py-2 text-sm text-green-300">
+            {catMessage}
+          </p>
         )}
 
-        <div className="flex flex-col gap-4">
+        <div className="mt-5 flex flex-col gap-4">
           <input
             type="text"
             placeholder="Category Name"
             value={catName}
             onChange={(e) => setCatName(e.target.value)}
-            className="p-3 rounded-lg bg-gray-900 border border-gray-700 text-white"
+            className="rounded-lg border border-brand-border bg-black/30 p-3 text-white outline-none transition focus:border-brand-accent"
           />
           <input
             type="text"
             placeholder="Slug (e.g. learning)"
             value={catSlug}
             onChange={(e) => setCatSlug(e.target.value)}
-            className="p-3 rounded-lg bg-gray-900 border border-gray-700 text-white"
+            className="rounded-lg border border-brand-border bg-black/30 p-3 text-white outline-none transition focus:border-brand-accent"
           />
           <select
             value={catParentId}
             onChange={(e) => setCatParentId(e.target.value)}
-            className="p-3 rounded-lg bg-gray-900 border border-gray-700 text-white"
+            className="rounded-lg border border-brand-border bg-black/30 p-3 text-white outline-none transition focus:border-brand-accent"
           >
             <option value="">No Parent (Root Category)</option>
             {categories.map((c) => (
@@ -169,39 +181,41 @@ export default function AdminPage() {
           </select>
           <button
             onClick={createCategory}
-            className="p-3 bg-white text-black rounded-lg font-bold hover:bg-gray-200"
+            className="rounded-lg bg-brand-accent p-3 font-semibold text-white transition hover:opacity-90"
           >
             Create Category
           </button>
         </div>
-      </div>
+      </section>
 
-      <div>
-        <h2 className="text-xl font-bold mb-4">Create Content</h2>
+      <section className="mt-8 rounded-xl border border-brand-border bg-white/[0.02] p-6 md:p-8">
+        <h2 className="text-2xl font-semibold tracking-tight">Create Content</h2>
 
         {contentMessage && (
-          <p className="text-green-400 text-sm mb-4">{contentMessage}</p>
+          <p className="mb-4 mt-4 rounded-md border border-green-500/30 bg-green-500/10 px-3 py-2 text-sm text-green-300">
+            {contentMessage}
+          </p>
         )}
 
-        <div className="flex flex-col gap-4">
+        <div className="mt-5 flex flex-col gap-4">
           <input
             type="text"
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="p-3 rounded-lg bg-gray-900 border border-gray-700 text-white"
+            className="rounded-lg border border-brand-border bg-black/30 p-3 text-white outline-none transition focus:border-brand-accent"
           />
           <input
             type="text"
             placeholder="Slug (e.g. how-to-solve-dp)"
             value={contentSlug}
             onChange={(e) => setContentSlug(e.target.value)}
-            className="p-3 rounded-lg bg-gray-900 border border-gray-700 text-white"
+            className="rounded-lg border border-brand-border bg-black/30 p-3 text-white outline-none transition focus:border-brand-accent"
           />
           <select
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-            className="p-3 rounded-lg bg-gray-900 border border-gray-700 text-white"
+            className="rounded-lg border border-brand-border bg-black/30 p-3 text-white outline-none transition focus:border-brand-accent"
           >
             <option value="">Select Category</option>
             {categories.map((c) => (
@@ -215,16 +229,16 @@ export default function AdminPage() {
             value={body}
             onChange={(e) => setBody(e.target.value)}
             rows={10}
-            className="p-3 rounded-lg bg-gray-900 border border-gray-700 text-white"
+            className="rounded-lg border border-brand-border bg-black/30 p-3 text-white outline-none transition focus:border-brand-accent"
           />
           <button
             onClick={createContent}
-            className="p-3 bg-white text-black rounded-lg font-bold hover:bg-gray-200"
+            className="rounded-lg bg-brand-accent p-3 font-semibold text-white transition hover:opacity-90"
           >
             Create Content
           </button>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

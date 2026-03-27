@@ -29,34 +29,42 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex items-center justify-center py-20">
-      <div className="w-full max-w-sm">
-        <h1 className="text-3xl font-bold mb-8">Login</h1>
+    <div className="mx-auto flex w-full max-w-6xl items-center justify-center px-6 py-16 md:px-8">
+      <div className="w-full max-w-md rounded-2xl border border-brand-border bg-white/[0.02] p-8 md:p-10">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
+          Account
+        </p>
+        <h1 className="mt-3 text-3xl font-bold tracking-tight">Sign in</h1>
+        <p className="mt-2 text-sm text-brand-muted">
+          Access your dashboard to manage categories and content.
+        </p>
 
         {error && (
-          <p className="text-red-400 text-sm mb-4">{error}</p>
+          <p className="mb-4 mt-6 rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+            {error}
+          </p>
         )}
 
-        <div className="flex flex-col gap-4">
+        <div className="mt-6 flex flex-col gap-4">
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="p-3 rounded-lg bg-gray-900 border border-gray-700 text-white"
+            className="rounded-lg border border-brand-border bg-black/30 p-3 text-white outline-none transition focus:border-brand-accent"
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="p-3 rounded-lg bg-gray-900 border border-gray-700 text-white"
+            className="rounded-lg border border-brand-border bg-black/30 p-3 text-white outline-none transition focus:border-brand-accent"
           />
           <button
             onClick={handleLogin}
-            className="p-3 bg-white text-black rounded-lg font-bold hover:bg-gray-200"
+            className="rounded-lg bg-brand-accent p-3 font-semibold text-white transition hover:opacity-90"
           >
-            Login
+            Sign in
           </button>
         </div>
       </div>
