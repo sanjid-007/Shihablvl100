@@ -224,9 +224,9 @@ export default function AboutPage() {
         <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
           Experience
         </h2>
-        <p className="mt-2 text-sm text-brand-muted">
+        {/* <p className="mt-2 text-sm text-brand-muted">
          List of experiences I have worked on.
-        </p>
+        </p> */}
         <div className="mt-8 flex flex-col gap-8">
           {EXPERIENCE.map((job) => (
             <article
@@ -308,9 +308,9 @@ export default function AboutPage() {
         <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
           Projects
         </h2>
-        <p className="mt-2 text-sm text-brand-muted">
+        {/* <p className="mt-2 text-sm text-brand-muted">
           List of projects I have worked on.
-        </p>
+        </p> */}
         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.map((project) => (
             <article
